@@ -6,7 +6,11 @@
 /*   By: csekakul <csekakul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 14:01:50 by csekakul          #+#    #+#             */
-/*   Updated: 2026/02/05 14:01:51 by csekakul         ###   ########.fr       */
+/*   Updated: 2026/02/05 14:29:12 by csekakul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+char	*get_next_line(int fd)
+{
+	return (0);
+}
