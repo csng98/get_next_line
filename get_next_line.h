@@ -6,7 +6,7 @@
 /*   By: csekakul <csekakul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 14:02:00 by csekakul          #+#    #+#             */
-/*   Updated: 2026/02/06 13:54:06 by csekakul         ###   ########.fr       */
+/*   Updated: 2026/02/06 15:26:55 by csekakul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@
 // Structures
 typedef struct s_list
 {
-	void					*content;
-	struct s_list			*next;
-}									t_list;
+	char			buf[BUFFER_SIZE + 1];
+	struct s_list	*next;
+}				t_list;
 
 // Functions
 

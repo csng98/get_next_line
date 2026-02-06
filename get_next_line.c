@@ -6,23 +6,11 @@
 /*   By: csekakul <csekakul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 14:01:50 by csekakul          #+#    #+#             */
-/*   Updated: 2026/02/06 13:52:56 by csekakul         ###   ########.fr       */
+/*   Updated: 2026/02/06 15:25:04 by csekakul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-t_list	*ft_lstnew(void *content)
-{
-	t_list	*elem;
-
-	elem = malloc(sizeof(t_list));
-	if (!elem)
-		return (NULL);
-	elem->content = content;
-	elem->next = NULL;
-	return (elem);
-}
 
 char	*get_buffer(int fd, char *buffer)
 {
@@ -33,6 +21,7 @@ char	*get_buffer(int fd, char *buffer)
 	if (!buffer)
 		return (NULL);
 	read(fd, &buffer, 5);
+	if (read(fd, &buffer, BUFFER_SIZE))
 	
 }
 

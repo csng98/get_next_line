@@ -99,3 +99,4 @@ Exits only during function execution|Exits throughout the program execution|
 - [Gitbook guide](https://42-cursus.gitbook.io/guide/1-rank-01/get_next_line/open-and-read)
 - [Static variables](https://www.geeksforgeeks.org/c/static-variables-in-c/)
 - [GNL guide](https://yannick.eu/gnl/)
+- man 2 read
