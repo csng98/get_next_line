@@ -1,6 +1,6 @@
 *This project has been created as part of the 42 curriculum by csekakul.*
 
-# Descriotion
+# Description
 
 TODO: clean up this section, because it's chaotic
 
@@ -98,3 +98,4 @@ Exits only during function execution|Exits throughout the program execution|
 - [Overview of the project](https://www.youtube.com/watch?v=-Mt2FdJjVno&t=157s)
 - [Gitbook guide](https://42-cursus.gitbook.io/guide/1-rank-01/get_next_line/open-and-read)
 - [Static variables](https://www.geeksforgeeks.org/c/static-variables-in-c/)
+- [GNL guide](https://yannick.eu/gnl/)

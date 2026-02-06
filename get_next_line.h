@@ -6,7 +6,7 @@
 /*   By: csekakul <csekakul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 14:02:00 by csekakul          #+#    #+#             */
-/*   Updated: 2026/02/06 12:05:41 by csekakul         ###   ########.fr       */
+/*   Updated: 2026/02/06 13:54:06 by csekakul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,14 @@
 // Includes
 # include <fcntl.h>
 # include <stdlib.h>
+# include <unistd.h>
+
+// Structures
+typedef struct s_list
+{
+	void					*content;
+	struct s_list			*next;
+}									t_list;
 
 // Functions
 
