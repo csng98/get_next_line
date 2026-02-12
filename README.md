@@ -2,7 +2,7 @@
 
 # Description
 
-TODO: clean up this section, because it's chaotic
+The `get_next_line` project is a programming exercise that challenges you to implement a function capable of reading a line from a file descriptor. The primary goal is to develop a function that allows reading from a file descriptor efficiently, providing a line-by-line extraction from the given input. This project introduces the concept of static variables and encourages a deeper understanding of memory management and file I/O in the C programming language.
 
 My approach of this challange is the following:
 - I am going to open a file referenced by the file descriptor using `open()`.
@@ -15,8 +15,9 @@ My approach of this challange is the following:
 - *get_next_line* returns a character string which corresponds to the line which is read in the file. This character string will be our variable *line*.
 - After saving a line in *line*, we need to clean up *stash* with `free`. But only the exact same thing we just saved in *line*, the rest we leave for the next round.
 
--> So *stash* is a static variable and also a linked list? What are the elements of the linked list?
--> *line* is just a simple char *?
+-> So *stash* is a static variable and also a linked list? YES What are the elements of the linked list? 
+
+-> *line* is just a simple char *? ALSO YES
 
 ## `read()`
 
@@ -35,7 +36,7 @@ My approach of this challange is the following:
 	- O_CREAT: This flag is applied to create a file if it doesn’t exist in the specified path or directory
 	- O_EXCL: Prevents the file creation if it already exists in the directory or location.
 - Return value: The return value of open() is a file descriptor, a small, nonnegative integer that is an index to an entry in the process' table of open file descriptors. If there is an error somewhere, the function will return -1 as a synonym of faliure.
-- Example
+- Example:
 	```C
 	int main()
 	{
@@ -45,7 +46,7 @@ My approach of this challange is the following:
 	```
 ## static variables
 - A static variable is declared using static keyword and have the property of retaining their value between multiple function calls. It is initialized only once and is not destroyed when the function returns a value. It extends the lifetime of the variable till the end of the program.
-- Example
+- Example:
 ```C
 int fun()
 {
@@ -62,7 +63,7 @@ int main()
 }
 ```
 - Global static variables: Static variables are generally declared inside functions, but they can also be declared outside functions (at the global scope). Global static variables have their scope limited to the file they are defined in (internal linkage). It means that they cannot be accessed outside the current translation unit (C source file).
-- Example
+- Example:
 ```C
 static int globalVar = 5;
 
@@ -94,9 +95,65 @@ Exits only during function execution|Exits throughout the program execution|
 
 # Instructions
 
+## 1. Compiling the files
+
+```
+$ make
+```
+
+## 2. Cleaning all binary (.o) and executable (.a) files
+
+```
+$ make fclean
+```
+
+## 3. Usage
+
+```C
+int	main(void)
+{
+	int		fd;
+	char	*rslt;
+
+	fd = open("file.txt", O_RDONLY);
+	rslt = get_next_line(fd);
+	printf("line -> %s", rslt);
+	return (0);
+}
+
+int	main(void)
+{
+	int		fd;
+	char	*putito;
+
+	fd = open("test.txt", O_RDONLY);
+	putito = get_next_line(fd);
+	while (putito)
+	{
+		printf("%s", putito);
+		free(putito);
+		putito = get_next_line(fd);
+	}
+	close(fd);
+	return (0);
+}
+```
+
 # Resources
 - [Overview of the project](https://www.youtube.com/watch?v=-Mt2FdJjVno&t=157s)
 - [Gitbook guide](https://42-cursus.gitbook.io/guide/1-rank-01/get_next_line/open-and-read)
 - [Static variables](https://www.geeksforgeeks.org/c/static-variables-in-c/)
 - [GNL guide](https://yannick.eu/gnl/)
 - man 2 read
+
+## Usage of AI for the project
+
+## Justification of libraries
+
+In my get_next_line.h file I included the following libraries:
+- fcntl.h
+	- For the `open()` function
+- unistd.h
+	- For the `read()` function 
+- stdlib.h
+	- For the `malloc()` function

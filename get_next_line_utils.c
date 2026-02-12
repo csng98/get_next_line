@@ -6,98 +6,97 @@
 /*   By: csekakul <csekakul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 14:01:56 by csekakul          #+#    #+#             */
-/*   Updated: 2026/02/06 12:07:59 by csekakul         ###   ########.fr       */
+/*   Updated: 2026/02/12 11:06:32 by csekakul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *s)
+void	ft_del(t_gnl_list **lst)
 {
-	size_t	i;
+	t_gnl_list	*temp;
 
-	i = 0;
-	while (s[i] != '\0')
-		i++;
-	return (i);
-}
-
-char	*ft_strjoin(char const *s1, char const *s2)
-{
-	char	*res;
-	int		i;
-	int		j;
-
-	i = 0;
-	j = 0;
-	res = (char *) malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
-	if (!res)
-		return (NULL);
-	while (s1[i])
-		res[j++] = s1[i++];
-	i = 0;
-	while (s2[i])
-		res[j++] = s2[i++];
-	res[j] = 0;
-	return (res);
-}
-
-char	*ft_strdup(const char *s)
-{
-	char	*dest;
-	size_t	i;
-
-	dest = (char *) malloc(ft_strlen(s) + 1);
-	if (!dest)
-		return (NULL);
-	i = 0;
-	while (s[i])
+	if (!lst)
+		return ;
+	while (*lst)
 	{
-		dest[i] = s[i];
-		i++;
+		temp = (*lst)->next;
+		free((*lst)->content);
+		free(*lst);
+		*lst = temp;
 	}
-	dest[i] = 0;
-	return (dest);
+	*lst = NULL;
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+t_gnl_list	*ft_lastnode(t_gnl_list **lst)
 {
-	char	*sub;
-	size_t	i;
+	t_gnl_list	*temp;
 
-	if (!s)
-		return (NULL);
-	if (start > ft_strlen(s))
-		return (ft_strdup(""));
-	if (len > ft_strlen(s + start))
-		len = ft_strlen(s + start);
-	sub = malloc((len + 1) * sizeof(char));
-	if (!sub)
-		return (NULL);
-	i = 0;
-	while (i < len)
-	{
-		sub[i] = s[start + i];
-		i++;
-	}
-	sub[i] = '\0';
-	return (sub);
+	temp = *lst;
+	if (temp == NULL)
+		return (temp);
+	while (temp->next != NULL)
+		temp = temp->next;
+	return (temp);
 }
 
-char	*ft_strchr(const char *s, int c)
+int	found_newline(t_gnl_list *lst)
 {
-	unsigned int	i;
-	char			cc;
+	int	i;
 
-	cc = (char) c;
-	i = 0;
-	while (s[i])
+	if (!lst)
+		return (0);
+	while (lst)
 	{
-		if (s[i] == cc)
-			return ((char *) &s[i]);
-		i++;
+		i = 0;
+		while (lst->content[i] && i < BUFFER_SIZE)
+		{
+			if (lst->content[i] = '\n' || lst->content[i] == '\0')
+				return (1);
+			++i;
+		}
+		lst = lst->next;
 	}
-	if (s[i] == cc)
-		return ((char *) &s[i]);
-	return (NULL);
+	return (0);
+}
+
+int	ft_contsize(t_gnl_list *temp)
+{
+	int	i;
+	int	k;
+
+	i = 0;
+	k = 0;
+	while (temp)
+	{
+		i = 0;
+		while (temp->content[i])
+		{
+			if (temp->content[i] == '\n')
+				return (++k);
+			++i;
+			++k;
+		}
+		temp = temp->next;
+	}
+	return (k);
+}
+
+int	ft_cpylst(t_gnl_list *temp, char *line, int displacer)
+{
+	int	i;
+
+	while (temp)
+	{
+		i = 0;
+		while (temp->content[i] != '\0')
+		{
+			if (temp->content[i] == '\n')
+				return (line[displacer++] = temp->content[i]);
+			else
+				line[displacer++] = temp->content[i++];
+		}
+		temp = temp->next;
+	}
+	return (displacer);
 }
