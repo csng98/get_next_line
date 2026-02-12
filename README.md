@@ -110,6 +110,8 @@ $ make fclean
 ## 3. Usage
 
 ```C
+#include<fcntl.h>
+
 int	main(void)
 {
 	int		fd;
@@ -144,6 +146,7 @@ int	main(void)
 - [Gitbook guide](https://42-cursus.gitbook.io/guide/1-rank-01/get_next_line/open-and-read)
 - [Static variables](https://www.geeksforgeeks.org/c/static-variables-in-c/)
 - [GNL guide](https://yannick.eu/gnl/)
+- [File Descriptors](https://dev.to/aerrfig/get-next-line-a-42-project-to-learn-how-to-deal-with-file-descriptors-and-io-of-system-3652)
 - man 2 read
 
 ## Usage of AI for the project
@@ -151,8 +154,7 @@ int	main(void)
 ## Justification of libraries
 
 In my get_next_line.h file I included the following libraries:
-- fcntl.h
-	- For the `open()` function
+
 - unistd.h
 	- For the `read()` function 
 - stdlib.h

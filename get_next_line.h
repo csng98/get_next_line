@@ -6,7 +6,7 @@
 /*   By: csekakul <csekakul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 14:02:00 by csekakul          #+#    #+#             */
-/*   Updated: 2026/02/12 11:49:38 by csekakul         ###   ########.fr       */
+/*   Updated: 2026/02/12 12:45:06 by csekakul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # endif
 
 // Includes
-# include <fcntl.h>
 # include <stdlib.h>
 # include <unistd.h>
 
