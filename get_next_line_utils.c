@@ -6,7 +6,7 @@
 /*   By: csekakul <csekakul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 14:01:56 by csekakul          #+#    #+#             */
-/*   Updated: 2026/02/12 11:06:32 by csekakul         ###   ########.fr       */
+/*   Updated: 2026/02/12 14:20:14 by csekakul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	found_newline(t_gnl_list *lst)
 		i = 0;
 		while (lst->content[i] && i < BUFFER_SIZE)
 		{
-			if (lst->content[i] = '\n' || lst->content[i] == '\0')
+			if (lst->content[i] == '\n' || lst->content[i] == '\0')
 				return (1);
 			++i;
 		}
