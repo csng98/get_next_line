@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csekakul <csekakul@student.42.fr>          +#+  +:+       +#+        */
+/*   By: csekakul <csekakul@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 14:02:00 by csekakul          #+#    #+#             */
-/*   Updated: 2026/02/12 12:45:06 by csekakul         ###   ########.fr       */
+/*   Updated: 2026/02/13 16:18:08 by csekakul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <unistd.h>
 
 // Structures
-typedef struct s_list
+typedef struct s_gnl_list
 {
 	char				*content;
 	struct s_gnl_list	*next;

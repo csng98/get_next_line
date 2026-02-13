@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csekakul <csekakul@student.42.fr>          +#+  +:+       +#+        */
+/*   By: csekakul <csekakul@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 14:01:50 by csekakul          #+#    #+#             */
-/*   Updated: 2026/02/12 11:47:25 by csekakul         ###   ########.fr       */
+/*   Updated: 2026/02/13 16:08:08 by csekakul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char	*ft_newline(t_gnl_list **lst, char *line, int l_line)
 
 	temp = *lst;
 	displacer = 0;
-	l_line += ft_constsize(temp);
+	l_line += ft_contsize(temp);
 	line = (char *)malloc(sizeof(char) * (l_line + 1));
 	if (!line)
 	{
@@ -75,7 +75,7 @@ char	*ft_newline(t_gnl_list **lst, char *line, int l_line)
 	return (line);
 }
 
-void	ft_gnl_lstnew(t_gnl_list **lst, int fd)
+void	ft_lstnew(t_gnl_list **lst, int fd)
 {
 	int		char_read;
 	char	*buf;
@@ -112,7 +112,7 @@ char	*get_next_line(int fd)
 	}
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	ft_gnl_lstnew(&lst, fd);
+	ft_lstnew(&lst, fd);
 	if (lst == NULL)
 		return (NULL);
 	line = ft_newline(&lst, line, l_line);
