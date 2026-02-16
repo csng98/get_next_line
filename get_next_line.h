@@ -6,14 +6,14 @@
 /*   By: csekakul <csekakul@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 14:02:00 by csekakul          #+#    #+#             */
-/*   Updated: 2026/02/13 16:18:08 by csekakul         ###   ########.fr       */
+/*   Updated: 2026/02/16 15:04:52 by csekakul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-# ifndef BUFFER_SIE
+# ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 10
 # endif
 
@@ -33,7 +33,7 @@ char		*get_next_line(int fd);
 void		ft_attach(t_gnl_list **lst, char *buf);
 char		*ft_newline(t_gnl_list **lst, char *line, int l_line);
 void		ft_lstclear(t_gnl_list **lst);
-void		ft_gnl_lstnew(t_gnl_list **lst, int fd);
+void		ft_lstnew(t_gnl_list **lst, int fd);
 t_gnl_list	*ft_lastnode(t_gnl_list **lst);
 int			found_newline(t_gnl_list *lst);
 int			ft_contsize(t_gnl_list *temp);

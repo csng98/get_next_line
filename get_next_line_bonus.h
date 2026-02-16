@@ -6,7 +6,7 @@
 /*   By: csekakul <csekakul@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 09:22:34 by csekakul          #+#    #+#             */
-/*   Updated: 2026/02/13 10:01:32 by csekakul         ###   ########.fr       */
+/*   Updated: 2026/02/13 16:26:54 by csekakul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # define BUFFER_SIZE 10
 #endif
 
-# include <fcntl.h>
 # include <limits.h>
 # include <stdio.h>
 # include <stdlib.h>
