@@ -3,122 +3,105 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: csekakul <csekakul@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: csekakul <csekakul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 14:01:50 by csekakul          #+#    #+#             */
-/*   Updated: 2026/02/13 16:08:08 by csekakul         ###   ########.fr       */
+/*   Updated: 2026/02/17 13:12:48 by csekakul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-void	ft_lstclear(t_gnl_list **lst)
+static char	*join_and_free(char *s1, char *s2)
 {
-	t_gnl_list	*lastnode;
-	int			i;
-	int			k;
-	char		*buf;
+	char	*joined;
+	size_t	len1;
+	size_t	len2;
 
-	buf = malloc(BUFFER_SIZE + 1);
-	if (!buf)
-		return (ft_del(lst));
-	lastnode = ft_lastnode(lst);
-	i = 0;
-	k = 0;
-	while (lastnode->content[i] != '\0' && lastnode->content[i] != '\n')
-		++i;
-	while (lastnode->content[i] != '\0' && lastnode->content[++i])
-		buf[k++] = lastnode->content[i];
-	buf[k] = '\0';
-	ft_del(lst);
-	ft_attach(lst, buf);
+	if (!s1)
+		return (s2);
+	len1 = strlen(s1);
+	len2 = strlen(s2);
+	joined = malloc(len1 + len2 + 1);
+	if (!joined)
+		return (free(s1), free(s2), NULL);
+	memcpy(joined, s1, len1);
+	memcpy(joined + len1, s2, len2);
+	joined[len1 + len2] = '\0';
+	free(s1);
+	free(s2);
+	return (joined);
 }
 
-void	ft_attach(t_gnl_list **lst, char *buf)
+static char	*extract_line(char *stash)
 {
-	t_gnl_list	*new_node;
-	t_gnl_list	*lastnode;
+	size_t	i;
+	char	*line;
 
-	if (!buf[0])
-		return (free(buf));
-	new_node = malloc(sizeof(t_gnl_list));
-	if (!new_node)
-	{
-		free(buf);
-		return (ft_del(lst));
-	}
-	lastnode = ft_lastnode(lst);
-	if (!lastnode)
-		*lst = new_node;
-	else
-		lastnode->next = new_node;
-	new_node->content = buf;
-	new_node->next = NULL;
-}
-
-char	*ft_newline(t_gnl_list **lst, char *line, int l_line)
-{
-	t_gnl_list	*temp;
-	int			displacer;
-
-	temp = *lst;
-	displacer = 0;
-	l_line += ft_contsize(temp);
-	line = (char *)malloc(sizeof(char) * (l_line + 1));
-	if (!line)
-	{
-		ft_del(lst);
+	if (!stash || !stash[0])
 		return (NULL);
-	}
-	displacer = ft_cpylst(temp, line, displacer);
-	line[l_line] = '\0';
+	i = 0;
+	while (stash[i] && stash[i] != '\n')
+		i++;
+	if (stash[i] == '\n')
+		i++;
+	line = malloc(i + 1);
+	if (!line)
+		return (NULL);
+	memcpy(line, stash, i);
+	line[i] = '\0';
 	return (line);
 }
 
-void	ft_lstnew(t_gnl_list **lst, int fd)
+static char	*clean_stash(char *stash)
 {
-	int		char_read;
-	char	*buf;
+	size_t	i;
+	size_t	j;
+	char	*new_stash;
 
-	char_read = 0;
-	while (!found_newline(*lst))
-	{
-		buf = malloc(BUFFER_SIZE + 1);
-		if (buf == NULL)
-			return (ft_del(lst));
-		char_read = read(fd, buf, BUFFER_SIZE);
-		if (!char_read)
-		{
-			free(buf);
-			return ;
-		}
-		buf[char_read] = '\0';
-		ft_attach(lst, buf);
-	}
+	i = 0;
+	while (stash[i] && stash[i] != '\n')
+		i++;
+	if (!stash[i])
+		return (free(stash), NULL);
+	i++;
+	new_stash = malloc(strlen(stash + i) + 1);
+	if (!new_stash)
+		return (free(stash), NULL);
+	j = 0;
+	while (stash[i])
+		new_stash[j++] = stash[i++];
+	new_stash[j] = '\0';
+	free(stash);
+	return (new_stash);
 }
 
 char	*get_next_line(int fd)
 {
-	static t_gnl_list	*lst = NULL;
-	char				*line;
-	int					l_line;
+	static char	*stash;
+	char		*buffer;
+	char		*line;
+	int			bytes;
 
-	line = NULL;
-	l_line = 0;
-	if (read(fd, &line, 0) < 0)
-	{
-		ft_del(&lst);
-		return (NULL);
-	}
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	ft_lstnew(&lst, fd);
-	if (lst == NULL)
-		return (NULL);
-	line = ft_newline(&lst, line, l_line);
-	if (lst == NULL)
-		return (NULL);
-	ft_lstclear(&lst);
+	while (!ft_strchr(stash, '\n'))
+	{
+		buffer = malloc(BUFFER_SIZE + 1);
+		if (!buffer)
+			return (NULL);
+		bytes = read(fd, buffer, BUFFER_SIZE);
+		if (bytes <= 0)
+		{
+			free(buffer);
+			break ;
+		}
+		buffer[bytes] = '\0';
+		stash = join_and_free(stash, buffer);
+		if (!stash)
+			return (NULL);
+	}
+	line = extract_line(stash);
+	stash = clean_stash(stash);
 	return (line);
 }
-

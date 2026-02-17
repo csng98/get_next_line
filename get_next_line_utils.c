@@ -6,7 +6,7 @@
 /*   By: csekakul <csekakul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 14:01:56 by csekakul          #+#    #+#             */
-/*   Updated: 2026/02/12 14:20:14 by csekakul         ###   ########.fr       */
+/*   Updated: 2026/02/17 10:19:10 by csekakul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,10 @@ int	ft_cpylst(t_gnl_list *temp, char *line, int displacer)
 		while (temp->content[i] != '\0')
 		{
 			if (temp->content[i] == '\n')
-				return (line[displacer++] = temp->content[i]);
+			{
+				line[displacer++] = temp->content[i];
+				return (displacer);
+			}
 			else
 				line[displacer++] = temp->content[i++];
 		}

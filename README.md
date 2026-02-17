@@ -125,7 +125,7 @@ There are two common approaches.
 
 ---
 
-## Option A — Stash as a Single String
+## Option A — Stash as a Single String (My final approach)
 
 ```c
 static char *stash;
@@ -142,6 +142,9 @@ You:
 
 - Simple design
 - Easy to understand
+- One growing string
+- One extraction
+- One cleanup
 
 ### Cons
 
@@ -150,7 +153,7 @@ You:
 
 ---
 
-## Option B — Stash as a Linked List (My Approach)
+## Option B — Stash as a Linked List (This was my first approach)
 
 ```c
 typedef struct s_gnl_list
@@ -169,7 +172,7 @@ Instead of continuously reallocating a large string:
   - Allocate once
   - Copy data once
 
-### Why I chose this:
+### Why I wated to choose this first:
 
 - Fewer large reallocations
 - Potentially faster for long lines
@@ -218,8 +221,6 @@ If using a static library:
 cc -Wall -Wextra -Werror -D BUFFER_SIZE=42 main.c get_next_line.a
 ```
 
-> ⚠️ Important: libraries must appear **after** the files that use them.
-
 ---
 
 # How to Test
@@ -239,8 +240,10 @@ int main(void)
     char *line;
 
     if (fd < 0)
-        return (1);
-
+	{
+    	printf("Invalid file descriptor.\n");
+		return (1);
+	}
     while ((line = get_next_line(fd)) != NULL)
     {
         printf("%s", line);
@@ -323,4 +326,4 @@ All implementation decisions, debugging, and testing were done manually.
 - Manages memory safely
 - Handles edge cases
 - Works with any buffer size
-- Supports multiple file descriptors (if bonus implemented)
+- Supports multiple file descriptors
