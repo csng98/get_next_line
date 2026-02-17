@@ -6,100 +6,74 @@
 /*   By: csekakul <csekakul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 14:01:56 by csekakul          #+#    #+#             */
-/*   Updated: 2026/02/17 10:19:10 by csekakul         ###   ########.fr       */
+/*   Updated: 2026/02/17 13:33:44 by csekakul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-void	ft_del(t_gnl_list **lst)
+size_t	ft_strlen(const char *s)
 {
-	t_gnl_list	*temp;
-
-	if (!lst)
-		return ;
-	while (*lst)
-	{
-		temp = (*lst)->next;
-		free((*lst)->content);
-		free(*lst);
-		*lst = temp;
-	}
-	*lst = NULL;
-}
-
-t_gnl_list	*ft_lastnode(t_gnl_list **lst)
-{
-	t_gnl_list	*temp;
-
-	temp = *lst;
-	if (temp == NULL)
-		return (temp);
-	while (temp->next != NULL)
-		temp = temp->next;
-	return (temp);
-}
-
-int	found_newline(t_gnl_list *lst)
-{
-	int	i;
-
-	if (!lst)
-		return (0);
-	while (lst)
-	{
-		i = 0;
-		while (lst->content[i] && i < BUFFER_SIZE)
-		{
-			if (lst->content[i] == '\n' || lst->content[i] == '\0')
-				return (1);
-			++i;
-		}
-		lst = lst->next;
-	}
-	return (0);
-}
-
-int	ft_contsize(t_gnl_list *temp)
-{
-	int	i;
-	int	k;
+	size_t	i;
 
 	i = 0;
-	k = 0;
-	while (temp)
-	{
-		i = 0;
-		while (temp->content[i])
-		{
-			if (temp->content[i] == '\n')
-				return (++k);
-			++i;
-			++k;
-		}
-		temp = temp->next;
-	}
-	return (k);
+	while (s[i] != '\0')
+		i++;
+	return (i);
 }
 
-int	ft_cpylst(t_gnl_list *temp, char *line, int displacer)
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	int	i;
+	size_t				i;
+	unsigned char		*d;
+	const unsigned char	*s;
 
-	while (temp)
+	if (!dest && !src)
+		return (NULL);
+	d = (unsigned char *)dest;
+	s = (const unsigned char *)src;
+	i = 0;
+	while (i < n)
 	{
-		i = 0;
-		while (temp->content[i] != '\0')
-		{
-			if (temp->content[i] == '\n')
-			{
-				line[displacer++] = temp->content[i];
-				return (displacer);
-			}
-			else
-				line[displacer++] = temp->content[i++];
-		}
-		temp = temp->next;
+		d[i] = s[i];
+		i++;
 	}
-	return (displacer);
+	return (dest);
 }
+
+char	*ft_strchr(const char *s, int c)
+{
+	unsigned int	i;
+	char			cc;
+
+	cc = (char) c;
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == cc)
+			return ((char *) &s[i]);
+		i++;
+	}
+	if (s[i] == cc)
+		return ((char *) &s[i]);
+	return (NULL);
+}
+
+char	*ft_strdup(const char *s)
+{
+	char	*dest;
+	size_t	i;
+
+	dest = (char *) malloc(ft_strlen(s) + 1);
+	if (!dest)
+		return (NULL);
+	i = 0;
+	while (s[i])
+	{
+		dest[i] = s[i];
+		i++;
+	}
+	dest[i] = 0;
+	return (dest);
+}
+

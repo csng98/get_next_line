@@ -6,7 +6,7 @@
 /*   By: csekakul <csekakul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 14:01:50 by csekakul          #+#    #+#             */
-/*   Updated: 2026/02/17 13:12:48 by csekakul         ###   ########.fr       */
+/*   Updated: 2026/02/17 13:39:06 by csekakul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,28 +79,25 @@ static char	*clean_stash(char *stash)
 char	*get_next_line(int fd)
 {
 	static char	*stash;
-	char		*buffer;
+	char		buffer[BUFFER_SIZE + 1];
 	char		*line;
 	int			bytes;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	while (!ft_strchr(stash, '\n'))
+	bytes = 1;
+	while (!ft_strchr(stash, '\n') && bytes > 0) 
 	{
-		buffer = malloc(BUFFER_SIZE + 1);
-		if (!buffer)
-			return (NULL);
 		bytes = read(fd, buffer, BUFFER_SIZE);
-		if (bytes <= 0)
-		{
-			free(buffer);
-			break ;
-		}
+		if (bytes < 0)
+			return (free(stash), stash = NULL, NULL);
 		buffer[bytes] = '\0';
-		stash = join_and_free(stash, buffer);
+		stash = join_and_free(stash, ft_strdup(buffer));
 		if (!stash)
 			return (NULL);
 	}
+	if (!stash || !*stash)
+		return (free(stash), stash = NULL, NULL);
 	line = extract_line(stash);
 	stash = clean_stash(stash);
 	return (line);
