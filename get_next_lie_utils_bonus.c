@@ -1,45 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_lie_utils_bonus.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: csekakul <csekakul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/05 14:01:56 by csekakul          #+#    #+#             */
-/*   Updated: 2026/02/18 13:00:44 by csekakul         ###   ########.fr       */
+/*   Created: 2026/02/18 13:15:37 by csekakul          #+#    #+#             */
+/*   Updated: 2026/02/18 13:15:42 by csekakul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *s)
+char	*ft_strdup(char *s1)
 {
-	size_t	i;
+	char			*dest;
+	unsigned int	i;
 
-	i = 0;
-	while (s[i] != '\0')
-		i++;
-	return (i);
-}
-
-char	*ft_strdup(const char *s)
-{
-	char	*dest;
-	size_t	i;
-
-	if (!s)
-		return (NULL);
-	dest = malloc(ft_strlen(s) + 1);
+	dest = (char *) malloc(ft_strlen(s1) + 1);
 	if (!dest)
 		return (NULL);
 	i = 0;
-	while (s[i])
+	while (s1[i])
 	{
-		dest[i] = s[i];
+		dest[i] = s1[i];
 		i++;
 	}
-	dest[i] = '\0';
+	dest[i] = 0;
 	return (dest);
+}
+
+size_t	ft_strlen(char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
 }
 
 char	*ft_substr(char *s, unsigned int start, size_t len)

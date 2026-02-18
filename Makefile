@@ -6,7 +6,7 @@
 #    By: csekakul <csekakul@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/12 08:28:15 by csekakul          #+#    #+#              #
-#    Updated: 2026/02/12 11:21:08 by csekakul         ###   ########.fr        #
+#    Updated: 2026/02/18 10:12:28 by csekakul         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,8 @@ NAME = get_next_line.a
 
 SOURCES = \
 	get_next_line.c get_next_line_utils.c \
-	get_next_line_bonus.c get_next_line_utils_bonus.c
 
-HEADER = get_next_line_bonus.h
-INCLUDE = -I
+INCLUDE = -I.
 
 OBJECTS = $(SOURCES:.c=.o)
 
@@ -41,4 +39,4 @@ fclean: clean Makefile
 
 re: fclean all
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re

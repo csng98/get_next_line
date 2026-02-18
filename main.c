@@ -6,7 +6,7 @@
 /*   By: csekakul <csekakul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/16 11:16:01 by csekakul          #+#    #+#             */
-/*   Updated: 2026/02/17 08:40:45 by csekakul         ###   ########.fr       */
+/*   Updated: 2026/02/18 10:23:47 by csekakul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,11 @@ int	main(void)
 		printf("Invalid file decriptor.\n");
 		return (1);
 	}
-	line = get_next_line(fd);
-	while (line != NULL)
+	while ((line = get_next_line(fd)) != NULL)
 	{
 		printf("line -> %s", line);
 		free(line);
 	}
-
 	close(fd);
 	return (0);
 }

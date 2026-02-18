@@ -299,10 +299,12 @@ In testing:
 
 # Resources
 
-- 42 GitBook (open & read)
+- [Overview video](https://www.youtube.com/watch?v=-Mt2FdJjVno&t=2s)
+- [42 GitBook (open & read)](https://42-cursus.gitbook.io/guide/1-rank-01/get_next_line/open-and-read)
 - `man 2 read`
-- Static variable documentation
-- Community guides
+- [Static variables](https://en.wikipedia.org/wiki/Static_variable)
+- [Static variables 2](https://www.geeksforgeeks.org/c/static-variables-in-c/)
+- [Community guides]
 
 ---
 
