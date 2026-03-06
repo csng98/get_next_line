@@ -244,13 +244,13 @@ int main(void)
     	printf("Invalid file descriptor.\n");
 		return (1);
 	}
-    while ((line = get_next_line(fd)) != NULL)
-    {
-        printf("%s", line);
-        free(line);
-    }
-
-    close(fd);
+    line = get_next_line(fd);
+	while (line != NULL)
+	{
+		printf("line -> %s", line);
+		free(line);
+		line = get_next_line(fd);
+	}
     return (0);
 }
 ```

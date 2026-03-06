@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_lie_utils_bonus.c                         :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: csekakul <csekakul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 13:15:37 by csekakul          #+#    #+#             */
-/*   Updated: 2026/02/18 13:15:42 by csekakul         ###   ########.fr       */
+/*   Updated: 2026/02/18 13:38:30 by csekakul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strdup(char *s1)
+char	*ft_strdup(char *s)
 {
 	char			*dest;
 	unsigned int	i;
 
-	dest = (char *) malloc(ft_strlen(s1) + 1);
+	dest = (char *) malloc(ft_strlen(s) + 1);
 	if (!dest)
 		return (NULL);
 	i = 0;
-	while (s1[i])
+	while (s[i])
 	{
-		dest[i] = s1[i];
+		dest[i] = s[i];
 		i++;
 	}
 	dest[i] = 0;

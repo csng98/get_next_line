@@ -6,7 +6,7 @@
 /*   By: csekakul <csekakul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 13:16:41 by csekakul          #+#    #+#             */
-/*   Updated: 2026/02/18 13:16:45 by csekakul         ###   ########.fr       */
+/*   Updated: 2026/02/18 13:39:14 by csekakul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # include <fcntl.h>
 
 char	*get_next_line(int fd);
-
 char	*ft_strdup(char *s);
 size_t	ft_strlen(char *s);
 char	*ft_substr(char *s, unsigned int start, size_t len);
