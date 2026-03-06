@@ -6,7 +6,7 @@
 /*   By: csekakul <csekakul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 13:12:22 by csekakul          #+#    #+#             */
-/*   Updated: 2026/02/18 13:17:13 by csekakul         ###   ########.fr       */
+/*   Updated: 2026/03/06 14:56:33 by csekakul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,13 +86,13 @@ char	*get_next_line(int fd)
 	char		*buffer;
 
 	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+	if (fd < 0 || fd >= MAX_FD || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 	{
 		free(left_c[fd]);
 		free(buffer);
 		left_c[fd] = NULL;
 		buffer = NULL;
-		return (0);
+		return (NULL);
 	}
 	if (!buffer)
 		return (NULL);

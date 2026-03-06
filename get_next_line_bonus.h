@@ -6,7 +6,7 @@
 /*   By: csekakul <csekakul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 13:16:41 by csekakul          #+#    #+#             */
-/*   Updated: 2026/02/18 13:39:14 by csekakul         ###   ########.fr       */
+/*   Updated: 2026/03/06 14:52:54 by csekakul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 15
 # endif
-# define MAX_FD 10240
+# define MAX_FD 1024
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
