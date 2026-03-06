@@ -255,6 +255,42 @@ int main(void)
 }
 ```
 
+## Example `tester.c`
+```c
+#include <fcntl.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include "get_next_line.h"
+
+int	main(int argc, char **argv)
+{
+	int		fd;
+	char	*line;
+	int		i = 1;
+
+	if (argc != 2)
+	{
+		printf("Usage: ./a.out file\n");
+		return (1);
+	}
+
+	fd = open(argv[1], O_RDONLY);
+	if (fd < 0)
+	{
+		perror("open");
+		return (1);
+	}
+
+	while ((line = get_next_line(fd)))
+	{
+		printf("Line %d: %s", i++, line);
+		free(line);
+	}
+
+	close(fd);
+}
+```
+
 ---
 
 ## Test Different `BUFFER_SIZE` Values
