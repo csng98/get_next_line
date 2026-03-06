@@ -236,7 +236,7 @@ cc -Wall -Wextra -Werror -D BUFFER_SIZE=42 main.c get_next_line.a
 
 int main(void)
 {
-    int fd = open("test.txt", O_RDONLY);
+    int		fd = open("test.txt", O_RDONLY);
     char *line;
 
     if (fd < 0)
@@ -255,7 +255,7 @@ int main(void)
 }
 ```
 
-## Example `tester.c`
+## Example `main.c` with command line arguments
 ```c
 #include <fcntl.h>
 #include <stdio.h>
@@ -288,6 +288,53 @@ int	main(int argc, char **argv)
 	}
 
 	close(fd);
+}
+```
+
+## Example `main.c` for multiple file descriptors
+```c
+#include <fcntl.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include "get_next_line.h"
+
+int main(void)
+{
+    int		fd1;
+	int		fd2;
+    char	*line1 = NULL;
+    char	*line2 = NULL;
+
+    fd1 = open("file1.txt", O_RDONLY);
+    fd2 = open("file2.txt", O_RDONLY);
+
+    if (fd1 < 0 || fd2 < 0)
+    {
+        perror("open");
+        return 1;
+    }
+    while (1)
+    {
+        line1 = get_next_line(fd1);
+        line2 = get_next_line(fd2);
+        if (!line1 && !line2)
+            break;
+
+        if (line1)
+        {
+            printf("FD1: %s", line1);
+            free(line1);
+        }
+
+        if (line2)
+        {
+            printf("FD2: %s", line2);
+            free(line2);
+        }
+    }
+    close(fd1);
+    close(fd2);
+    return 0;
 }
 ```
 
