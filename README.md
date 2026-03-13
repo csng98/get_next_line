@@ -223,7 +223,7 @@ cc -Wall -Wextra -Werror -D BUFFER_SIZE=42 main.c get_next_line.a
 
 ---
 
-# How to Test
+# Instructions
 
 ## Example `main.c`
 
