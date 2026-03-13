@@ -273,7 +273,6 @@ int	main(int argc, char **argv)
 		printf("Usage: ./a.out file\n");
 		return (1);
 	}
-
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
 	{
@@ -286,7 +285,6 @@ int	main(int argc, char **argv)
 		printf("Line %d: %s", i++, line);
 		free(line);
 	}
-
 	close(fd);
 }
 ```
@@ -307,7 +305,6 @@ int main(void)
 
     fd1 = open("file1.txt", O_RDONLY);
     fd2 = open("file2.txt", O_RDONLY);
-
     if (fd1 < 0 || fd2 < 0)
     {
         perror("open");
@@ -319,13 +316,11 @@ int main(void)
         line2 = get_next_line(fd2);
         if (!line1 && !line2)
             break;
-
         if (line1)
         {
             printf("FD1: %s", line1);
             free(line1);
         }
-
         if (line2)
         {
             printf("FD2: %s", line2);
@@ -387,7 +382,6 @@ In testing:
 - `man 2 read`
 - [Static variables](https://en.wikipedia.org/wiki/Static_variable)
 - [Static variables 2](https://www.geeksforgeeks.org/c/static-variables-in-c/)
-- [Community guides]
 
 ---
 
