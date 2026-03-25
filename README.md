@@ -211,8 +211,7 @@ make fclean
 ## Manual compilation
 
 ```bash
-cc -Wall -Wextra -Werror -D BUFFER_SIZE=42 \
-main.c get_next_line.c get_next_line_utils.c
+cc -Wall -Wextra -Werror -D BUFFER_SIZE=42 main.c get_next_line.c get_next_line_utils.c
 ```
 
 If using a static library:

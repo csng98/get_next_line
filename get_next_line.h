@@ -6,7 +6,7 @@
 /*   By: csekakul <csekakul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 14:02:00 by csekakul          #+#    #+#             */
-/*   Updated: 2026/02/18 14:09:14 by csekakul         ###   ########.fr       */
+/*   Updated: 2026/03/25 07:23:51 by csekakul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@
 # include <unistd.h>
 
 // Functions
-char		*get_next_line(int fd);
-size_t		ft_strlen(char *s);
-char		*ft_strdup(char *s);
-char		*ft_substr(char *s, unsigned int start, size_t len);
-char		*ft_strjoin(char *s1, char *s2);
-void		fill_str(char *res, char *s1, char *s2);
+size_t	ft_strlen(char *s);
+char	*ft_strjoin(char *s1, char *s2);
+char	*ft_strchr(char *s, int c);
+char	*ft_substr(char *s, unsigned int start, size_t len);
+char	*get_next_line(int fd);
+char	*ft_free(char **str);
 
 #endif
