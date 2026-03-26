@@ -6,10 +6,9 @@
 /*   By: csekakul <csekakul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 13:15:37 by csekakul          #+#    #+#             */
-/*   Updated: 2026/03/25 07:27:05 by csekakul         ###   ########.fr       */
+/*   Updated: 2026/03/26 09:24:51 by csekakul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "get_next_line_bonus.h"
 
@@ -23,8 +22,8 @@ char	*ft_strjoin(char *s1, char *s2)
 	{
 		s1 = malloc(sizeof(char) + 1);
 		if (!s1)
-			return (0);
-		s1[0] = 0;
+			return (NULL);
+		s1[0] = '\0';
 	}
 	str = (char *)malloc(sizeof(char) * ft_strlen(s1) + ft_strlen(s2) + 1);
 	if (!str)
@@ -45,6 +44,8 @@ size_t	ft_strlen(char *s)
 	size_t	i;
 
 	i = 0;
+	if (!s)
+		return (0);
 	while (s[i] != '\0')
 		i++;
 	return (i);
@@ -55,6 +56,8 @@ char	*ft_strchr(char *s, int c)
 	int	i;
 
 	i = 0;
+	if (!s)
+		return (NULL);
 	while (s[i] != '\0')
 	{
 		if (s[i] == (char)c)
@@ -63,7 +66,7 @@ char	*ft_strchr(char *s, int c)
 	}
 	if ((char)c == '\0')
 		return (&((char *)s)[i]);
-	return (0);
+	return (NULL);
 }
 
 char	*ft_substr(char *s, unsigned int start, size_t len)
@@ -73,7 +76,7 @@ char	*ft_substr(char *s, unsigned int start, size_t len)
 
 	i = 0;
 	if (!s)
-		return (0);
+		return (NULL);
 	if (start > ft_strlen(s))
 	{
 		res = malloc(sizeof(char) * (1));
@@ -91,4 +94,18 @@ char	*ft_substr(char *s, unsigned int start, size_t len)
 		res[i++] = s[start++];
 	res[i] = '\0';
 	return (res);
+}
+
+static char	*join_and_free(char *stash, char *buffer)
+{
+	char	*tmp;
+
+	tmp = ft_strjoin(stash, buffer);
+	if (!tmp)
+	{
+		free(buffer);
+		free(stash);
+		return (NULL);
+	}
+	return (tmp);
 }

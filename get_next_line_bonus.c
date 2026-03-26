@@ -6,7 +6,7 @@
 /*   By: csekakul <csekakul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 13:12:22 by csekakul          #+#    #+#             */
-/*   Updated: 2026/03/25 07:37:51 by csekakul         ###   ########.fr       */
+/*   Updated: 2026/03/26 09:14:39 by csekakul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,17 @@ char	*ft_free(char **str)
 char	*clean_stash(char *stash)
 {
 	char	*new_stash;
-	char	*ptr;
+	char	*newline;
 	int		len;
 
-	ptr = ft_strchr(stash, '\n');
-	if (!ptr)
+	newline = ft_strchr(stash, '\n');
+	if (!newline)
 	{
 		new_stash = NULL;
 		return (ft_free(&stash));
 	}
 	else
-		len = (ptr - stash) + 1;
+		len = (newline - stash) + 1;
 	if (!stash[len])
 		return (ft_free(&stash));
 	new_stash = ft_substr(stash, len, ft_strlen(stash) - len);
@@ -45,38 +45,45 @@ char	*clean_stash(char *stash)
 char	*new_line(char *stash)
 {
 	char	*line;
-	char	*ptr;
+	char	*newline;
 	int		len;
 
-	ptr = ft_strchr(stash, '\n');
-	len = (ptr - stash) + 1;
+	if (!stash)
+		return (NULL);
+	newline = ft_strchr(stash, '\n');
+	if (newline)
+		len = (newline - stash) + 1;
+	else
+		len = ft_strlen(stash);
 	line = ft_substr(stash, 0, len);
 	if (!line)
 		return (NULL);
 	return (line);
 }
 
-char	*readbuf(int fd, char *stash)
+char	*read_buf(int fd, char *stash)
 {
-	int		rid;
+	int		bytes_read;
 	char	*buffer;
 
-	rid = 1;
+	bytes_read = 1;
 	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buffer)
 		return (ft_free(&stash));
 	buffer[0] = '\0';
-	while (rid > 0 && !ft_strchr(buffer, '\n'))
+	while (bytes_read > 0 && !ft_strchr(stash, '\n'))
 	{
-		rid = read(fd, buffer, BUFFER_SIZE);
-		if (rid > 0)
+		bytes_read = read(fd, buffer, BUFFER_SIZE);
+		if (bytes_read > 0)
 		{
-			buffer[rid] = '\0';
-			stash = ft_strjoin(stash, buffer);
+			buffer[bytes_read] = '\0';
+			stash = join_and_free(stash, buffer);
+			if (!stash)
+				return (NULL);
 		}
 	}
 	free(buffer);
-	if (rid == -1)
+	if (bytes_read == -1)
 		return (ft_free(&stash));
 	return (stash);
 }
@@ -89,7 +96,7 @@ char	*get_next_line(int fd)
 	if (fd < 0)
 		return (NULL);
 	if ((stash[fd] && !ft_strchr(stash[fd], '\n')) || !stash[fd])
-		stash[fd] = readbuf(fd, stash[fd]);
+		stash[fd] = read_buf(fd, stash[fd]);
 	if (!stash[fd])
 		return (NULL);
 	line = new_line(stash[fd]);
