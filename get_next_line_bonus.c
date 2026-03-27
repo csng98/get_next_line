@@ -6,18 +6,11 @@
 /*   By: csekakul <csekakul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 13:12:22 by csekakul          #+#    #+#             */
-/*   Updated: 2026/03/26 09:14:39 by csekakul         ###   ########.fr       */
+/*   Updated: 2026/03/27 07:46:42 by csekakul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
-
-char	*ft_free(char **str)
-{
-	free(*str);
-	*str = NULL;
-	return (NULL);
-}
 
 char	*clean_stash(char *stash)
 {
@@ -51,10 +44,7 @@ char	*new_line(char *stash)
 	if (!stash)
 		return (NULL);
 	newline = ft_strchr(stash, '\n');
-	if (newline)
-		len = (newline - stash) + 1;
-	else
-		len = ft_strlen(stash);
+	len = (newline - stash) + 1;
 	line = ft_substr(stash, 0, len);
 	if (!line)
 		return (NULL);
@@ -77,9 +67,7 @@ char	*read_buf(int fd, char *stash)
 		if (bytes_read > 0)
 		{
 			buffer[bytes_read] = '\0';
-			stash = join_and_free(stash, buffer);
-			if (!stash)
-				return (NULL);
+			stash = ft_strjoin(stash, buffer);
 		}
 	}
 	free(buffer);

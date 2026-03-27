@@ -236,7 +236,7 @@ cc -Wall -Wextra -Werror -D BUFFER_SIZE=42 main.c get_next_line.a
 int main(void)
 {
     int		fd = open("test.txt", O_RDONLY);
-    char *line;
+    char 	*line;
 
     if (fd < 0)
 	{
@@ -250,6 +250,7 @@ int main(void)
 		free(line);
 		line = get_next_line(fd);
 	}
+	close(fd);
     return (0);
 }
 ```

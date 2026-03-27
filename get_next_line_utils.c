@@ -6,11 +6,18 @@
 /*   By: csekakul <csekakul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 14:01:56 by csekakul          #+#    #+#             */
-/*   Updated: 2026/03/26 09:24:43 by csekakul         ###   ########.fr       */
+/*   Updated: 2026/03/26 09:44:00 by csekakul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+char	*ft_free(char **str)
+{
+	free(*str);
+	*str = NULL;
+	return (NULL);
+}
 
 char	*ft_strjoin(char *s1, char *s2)
 {
@@ -94,18 +101,4 @@ char	*ft_substr(char *s, unsigned int start, size_t len)
 		res[i++] = s[start++];
 	res[i] = '\0';
 	return (res);
-}
-
-static char	*join_and_free(char *stash, char *buffer)
-{
-	char	*tmp;
-
-	tmp = ft_strjoin(stash, buffer);
-	if (!tmp)
-	{
-		free(buffer);
-		free(stash);
-		return (NULL);
-	}
-	return (tmp);
 }

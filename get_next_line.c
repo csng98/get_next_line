@@ -6,18 +6,11 @@
 /*   By: csekakul <csekakul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 14:01:50 by csekakul          #+#    #+#             */
-/*   Updated: 2026/03/26 09:14:21 by csekakul         ###   ########.fr       */
+/*   Updated: 2026/03/27 07:46:31 by csekakul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-char	*ft_free(char **str)
-{
-	free(*str);
-	*str = NULL;
-	return (NULL);
-}
 
 char	*clean_stash(char *stash)
 {
@@ -51,10 +44,7 @@ char	*new_line(char *stash)
 	if (!stash)
 		return (NULL);
 	newline = ft_strchr(stash, '\n');
-	if (newline)
-		len = (newline - stash) + 1;
-	else
-		len = ft_strlen(stash);
+	len = (newline - stash) + 1;
 	line = ft_substr(stash, 0, len);
 	if (!line)
 		return (NULL);
@@ -73,13 +63,11 @@ char	*read_buf(int fd, char *stash)
 	buffer[0] = '\0';
 	while (bytes_read > 0 && !ft_strchr(stash, '\n'))
 	{
-		bytes_read = read (fd, buffer, BUFFER_SIZE);
+		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read > 0)
 		{
 			buffer[bytes_read] = '\0';
-			stash = join_and_free(stash, buffer);
-			if (!stash)
-				return (NULL);
+			stash = ft_strjoin(stash, buffer);
 		}
 	}
 	free(buffer);
@@ -96,7 +84,7 @@ char	*get_next_line(int fd)
 	if (fd < 0)
 		return (NULL);
 	if ((stash && !ft_strchr(stash, '\n')) || !stash)
-		stash = read_buf (fd, stash);
+		stash = read_buf(fd, stash);
 	if (!stash)
 		return (NULL);
 	line = new_line(stash);
