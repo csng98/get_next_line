@@ -1,6 +1,23 @@
 *This project has been created as part of the 42 curriculum by csekakul.*
 
-# get_next_line
+# Get Next Line: Dynamic Stream Parsing via Static State Contexts 📑
+
+Welcome to **get_next_line**, a C programming project focused on implementing a custom function that reads and extracts exactly one line at a time from a specific file descriptor stream.
+
+## 🚀 Project Overview
+The core objective of this project is to develop an efficient line-reading engine. Because standard system calls slice data by arbitrary byte boundaries rather than text formatting, this function intercepts raw buffer chunks, isolates individual line records, and safely manages leftovers between consecutive function executions.
+
+## 📂 Project Structure
+
+| File Name | Description |
+| :--- | :--- |
+| 📄 `get_next_line.h` | Central header file containing mandatory prototypes and structure definitions. |
+| 📄 `get_next_line.c` | Core logic functions handling line parsing, state checking, and standard reading loops. |
+| 📄 `get_next_line_utils.c` | Essential utility helper functions (string concatenation, character allocation, etc.). |
+| 📄 `get_next_line_bonus.h` | Expanded header file supporting infrastructure for multiple file descriptors. |
+| 📄 `get_next_line_bonus.c` | Multi-FD optimized core parsing loop employing state-isolation variables. |
+| 📄 `get_next_line_utils_bonus.c` | Helper functions explicitly tailored and named for the bonus files. |
+| 📄 `README.md` | Architectural overview, technical analysis, and system documentation. |
 
 ---
 
